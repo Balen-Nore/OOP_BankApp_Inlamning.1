@@ -40,25 +40,31 @@
             }
         }
 
-        private Bankkonto VäljKonto()
+        public void ÖverförPengar()
         {
-            Console.WriteLine("Välj konto:");
+            Bankkonto frånKonto = VäljKonto("Välj konto att överföra från:");
+            Bankkonto tillKonto = VäljKonto("Välj konto att överföra till:");
+            if (frånKonto != null && tillKonto != null)
+            {
+                double belopp = LäsGiltigtBelopp("Ange belopp att överföra: ");
+                frånKonto.ÖverförPengar(belopp, tillKonto);
+            }
+        }
+
+        private Bankkonto VäljKonto(string meddelande = "Välj konto:")
+        {
+            Console.WriteLine(meddelande);
             Console.WriteLine("1. Personkonto");
             Console.WriteLine("2. Sparkonto");
             Console.WriteLine("3. Investeringskonto");
 
-            switch (Console.ReadLine())
+            return Console.ReadLine() switch
             {
-                case "1":
-                    return _personkonto;
-                case "2":
-                    return _sparkonto;
-                case "3":
-                    return _investeringskonto;
-                default:
-                    Console.WriteLine("Felaktigt val.");
-                    return null;
-            }
+                "1" => _personkonto,
+                "2" => _sparkonto,
+                "3" => _investeringskonto,
+                _ => throw new InvalidOperationException("Ogiltigt val.")
+            };
         }
 
         private double LäsGiltigtBelopp(string meddelande)
@@ -73,5 +79,4 @@
             return belopp;
         }
     }
-
 }

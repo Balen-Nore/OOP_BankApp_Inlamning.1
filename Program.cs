@@ -13,7 +13,8 @@
                 Console.WriteLine("1. Visa saldo");
                 Console.WriteLine("2. Sätt in pengar");
                 Console.WriteLine("3. Ta ut pengar");
-                Console.WriteLine("4. Avsluta");
+                Console.WriteLine("4. Överför pengar");
+                Console.WriteLine("5. Avsluta");
 
                 Console.Write("Välj ett alternativ: ");
                 switch (Console.ReadLine())
@@ -28,6 +29,9 @@
                         banksystem.TaUtPengar();
                         break;
                     case "4":
+                        banksystem.ÖverförPengar();
+                        break;
+                    case "5":
                         körProgram = false;
                         Console.WriteLine("Avslutar programmet...");
                         break;
@@ -38,5 +42,4 @@
             }
         }
     }
-
 }
